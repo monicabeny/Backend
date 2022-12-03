@@ -96,6 +96,25 @@ COMMIT;
 --Before
 UPDATE hr_jobs SET min_salary = 4200 WHERE job_id = 'FI_ACCOUNT';
 
+-----------------
+-- Task 2-2  Store Procedure
+create or replace PROCEDURE update_job
+( 
+ p_jobid hr_jobs.job_id%TYPE, 
+ p_title hr_jobs.job_title%TYPE,
+ v_minsal hr_jobs.min_salary%TYPE,
+ v_maxsal hr_jobs.max_salary%TYPE
+ ); 
+BEGIN 
+ INSERT INTO hr_jobs(job_id, job_title, min_salary, max_salary) 
+ VALUES (p_jobid, p_title, v_minsal, v_maxsal); 
+ DBMS_OUTPUT.PUT_LINE ('Update row added to HR_JOBS table:'); 
+ DBMS_OUTPUT.PUT_LINE (p_jobid || ' ' || p_title ||' '|| 
+ v_minsal || ' ' || v_maxsal); 
+ COMMIT;
+END update_job;
+/
+
 -----------------------
 --Task 2-3  Create a New JOB
 CREATE OR REPLACE PROCEDURE new_job( 
@@ -121,8 +140,8 @@ EXECUTE new_job ('AS_MAN', 'Assistant Manager', 3500)
 SELECT * FROM hr_jobs WHERE job_id = 'AS_MAN'; 
 COMMIT; 
 -----------------------------
--- Task 3a – Creating a Trigger and also a Store Procedure to verify and check 
--- any Job’s minimum and Maximum Salary range if they are in acceptable limit
+-- Task 3a ï¿½ Creating a Trigger and also a Store Procedure to verify and check 
+-- any Jobï¿½s minimum and Maximum Salary range if they are in acceptable limit
 
 CREATE OR REPLACE PROCEDURE check_salary (p_the_job VARCHAR2, 
 p_the_salary NUMBER) IS 
