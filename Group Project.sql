@@ -1,22 +1,8 @@
-SET SERVEROUTPUT ON
-CREATE OR REPLACE PROCEDURE employee_hire_sp ( 
- p_first_name VARCHAR2, 
- p_last_name VARCHAR2, 
- p_email VARCHAR2, 
- p_phone VARCHAR2,
- p_hire_date DATE,
- p_job_id VARCHAR2,  
- p_salary NUMBER,
- p_manager_id NUMBER,
- p_department_id NUMBER) 
-IS 
-BEGIN 
- INSERT INTO hr_employees(employee_id, first_name, last_name, email, phone_number, hire_date, job_id, salary, manager_id, department_id) 
- VALUES (hr_employees_seq.NEXTVAL, p_first_name, p_last_name, p_email,  p_phone, TRUNC(SYSDATE), p_job_id, p_salary, p_manager_id, p_department_id); 
-COMMIT;
-END employee_hire_sp; 
-/ 
----------------------------------
+--Student Name: Farzana Alam
+--Date: 3rd Nov, 2022
+
+-------------------------------
+-- Task1-1: 
 SET SERVEROUTPUT ON
 CREATE OR REPLACE PROCEDURE employee_hire_sp ( 
  p_first_name hr_employees.first_name%TYPE, 
